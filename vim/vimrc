@@ -1,0 +1,44 @@
+filetype off
+call pathogen#infect()
+filetype plugin indent on
+
+set nocompatible
+set number
+
+" tabs stuff
+set tabstop=4
+set shiftwidth=4
+set softtabstop=4
+set expandtab
+
+" make things better
+set encoding=utf-8
+set scrolloff=3
+set autoindent
+set showmode
+set showcmd
+set hidden
+set visualbell
+set ttyfast
+set ruler
+set backspace=indent,eol,start
+set undofile
+
+syntax enable
+
+" searching/moving
+set ignorecase
+set smartcase
+set gdefault
+set incsearch
+set showmatch
+set hlsearch
+
+" long lines
+set wrap
+set textwidth=79
+set formatoptions=qrn1
+set colorcolumn=80
+
+colorscheme molokai
+set t_Co=256
