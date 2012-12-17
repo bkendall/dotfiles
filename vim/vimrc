@@ -22,8 +22,6 @@ set ruler
 set backspace=indent,eol,start
 set undofile
 
-syntax enable
-
 " searching/moving
 set ignorecase
 set smartcase
@@ -38,5 +36,9 @@ set textwidth=79
 set formatoptions=qrn1
 set colorcolumn=80
 
-colorscheme molokai
+syntax enable
+set background=dark
+let g:solarized_termcolors=256
+colorscheme solarized
+
 set t_Co=256
