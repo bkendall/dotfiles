@@ -1,3 +1,9 @@
+colorscheme solarized
+syntax enable
+set background=dark
+let g:solarized_termcolors=256
+set t_Co=256
+
 filetype on
 
 set nocompatible
@@ -35,10 +41,3 @@ set wrap
 set textwidth=79
 set formatoptions=qrn1
 set colorcolumn=80
-
-syntax enable
-set background=dark
-let g:solarized_termcolors=256
-colorscheme solarized
-
-set t_Co=256
