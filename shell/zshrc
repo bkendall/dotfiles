@@ -4,6 +4,19 @@ ZSH_THEME="kennethreitz"
 DISABLE_UPDATE_PROMPT=true
 MYVIMRC=$HOME/dotfiles.git/vim/vimrc
 
+if [ -e '/usr/local/bin/virtualenvwrapper.sh' ]
+then
+  export WORKON_HOME=$HOME/.virtualenvs
+  source /usr/local/bin/virtualenvwrapper.sh
+fi
+
+if [ -d "$HOME/.ssh/config.d" ]; then
+  rm -f $HOME/.ssh/config
+  cat $HOME/.ssh/config.d/*.config >> $HOME/.ssh/config
+fi
+
+export DOCKER_HOST=tcp://127.0.0.1:4243
+
 export UPDATE_ZSH_DAYS=13
 
 plugins=(git)
