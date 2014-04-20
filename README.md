@@ -15,3 +15,7 @@ shell
 Add this to `~/.zshrc`
 
     source $HOME/dotfiles.git/shell/zshrc
+
+oh-my-ssh
+---
+  curl -L http://install.ohmyz.sh | sh
