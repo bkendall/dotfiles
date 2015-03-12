@@ -10,6 +10,11 @@ then
   source /usr/local/bin/virtualenvwrapper.sh
 fi
 
+if [ -e '/usr/local/go' ]
+then
+  export PATH=$PATH:/usr/local/go/bin
+fi
+
 if [ -d "$HOME/.ssh/config.d" ]; then
   rm -f $HOME/.ssh/config
   cat $HOME/.ssh/config.d/*.config >> $HOME/.ssh/config
