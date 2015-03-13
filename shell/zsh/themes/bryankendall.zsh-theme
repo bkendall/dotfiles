@@ -18,7 +18,7 @@ ZSH_THEME_GIT_PROMPT_STATUS_SUFFIX="%{$reset_color%})"
 
 function my_git_prompt_status () {
   GPS=$(git_prompt_status)
-  if [[ "$GPS" != "" ]]; then
+  if [[ $(command git rev-parse --short HEAD 2> /dev/null) != "" ]]; then
     echo "$GPS$ZSH_THEME_GIT_PROMPT_STATUS_SUFFIX"
   fi
 }
