@@ -16,8 +16,15 @@ ZSH_THEME_GIT_PROMPT_SHA_AFTER="%{$reset_color%}"
 
 ZSH_THEME_GIT_PROMPT_STATUS_SUFFIX="%{$reset_color%})"
 
+function my_git_prompt_status () {
+  GPS=$(git_prompt_status)
+  if [[ "$GPS" != "" ]]; then
+    echo "$GPS$ZSH_THEME_GIT_PROMPT_STATUS_SUFFIX"
+  fi
+}
+
 PROMPT='%{$fg[green]%}%m%{$reset_color%}:\
 %{$fg[magenta]%}%c%{$reset_color%}\
-$(git_prompt_short_sha)$(git_prompt_info)$(git_prompt_status) \
+$(git_prompt_short_sha)$(git_prompt_info)$(my_git_prompt_status) \
 %(?.%{$fg[green]%}.%{$fg[red]%})%(!.#.»)%{$reset_color%} '
 PROMPT2='%{$fg[red]%}> %{$reset_color%}'
