@@ -1,26 +1,23 @@
-autoload -U colors && colors
+ZSH_THEME_GIT_PROMPT_SUFFIX="%{$reset_color%}"
+ZSH_THEME_GIT_PROMPT_PREFIX="|%{$fg[cyan]%}"
+ZSH_THEME_GIT_PROMPT_ADDED="%{$fg[green]%}+"
+ZSH_THEME_GIT_PROMPT_MODIFIED="%{$fg[blue]%}?"
+ZSH_THEME_GIT_PROMPT_DELETED="%{$fg[red]%}✖"
+ZSH_THEME_GIT_PROMPT_RENAMED="%{$fg[magenta]%}➜"
+ZSH_THEME_GIT_PROMPT_UNMERGED="%{$fg[yellow]%}═"
+ZSH_THEME_GIT_PROMPT_UNTRACKED="%{$fg[cyan]%}✭"
 
-autoload -Uz vcs_info
+ZSH_THEME_GIT_PROMPT_DIRTY="%{$fg_bold[red]%}?"
+ZSH_THEME_GIT_PROMPT_AHEAD="%{$fg_bold[red]%}!"
+ZSH_THEME_GIT_PROMPT_CLEAN="" # clean doesn't need anything
 
-zstyle ':vcs_info:*' stagedstr '%F{green}●'
-zstyle ':vcs_info:*' unstagedstr '%F{yellow}●'
-zstyle ':vcs_info:*' check-for-changes true
-zstyle ':vcs_info:(sv[nk]|bzr):*' branchformat '%b%F{1}:%F{11}%r'
-theme_precmd () {
-    if [[ -z $(git ls-files --other --exclude-standard 2> /dev/null) ]] {
-        zstyle ':vcs_info:*' formats ' [%b%c%u%F{green}]'
-    } else {
-        zstyle ':vcs_info:*' formats ' [%b%c%u%F{red}●%F{green}]'
-    }
+ZSH_THEME_GIT_PROMPT_SHA_BEFORE="(%{$fg[red]%}"
+ZSH_THEME_GIT_PROMPT_SHA_AFTER="%{$reset_color%}"
 
-    vcs_info
-}
+ZSH_THEME_GIT_PROMPT_STATUS_SUFFIX="%{$reset_color%})"
 
-PROMPT='%{$fg[cyan]%}%n@%m%{$reset_color%} \
-%{$fg[green]%}%c\
-${vcs_info_msg_0_}%{$reset_color%} \
+PROMPT='%{$fg[green]%}%m%{$reset_color%}:\
+%{$fg[magenta]%}%c%{$reset_color%}\
+$(git_prompt_short_sha)$(git_prompt_info)$(git_prompt_status) \
 %(?.%{$fg[green]%}.%{$fg[red]%})%(!.#.»)%{$reset_color%} '
 PROMPT2='%{$fg[red]%}> %{$reset_color%}'
-
-autoload -U add-zsh-hook
-add-zsh-hook precmd  theme_precmd
