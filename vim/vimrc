@@ -28,6 +28,8 @@ set ruler
 set backspace=indent,eol,start
 set undofile
 set undodir=~/.vim/undodir
+set directory=~/.vim/backup
+set backupdir=~/.vim/backup
 
 " searching/moving
 set ignorecase
@@ -41,4 +43,30 @@ set hlsearch
 set wrap
 set textwidth=79
 set formatoptions=qrn1
-set colorcolumn=80
+set colorcolumn=80,100
+
+" modelines
+set modeline
+set modelines=3
+
+" status line
+set statusline=%<%f\ (%{&ft})\ %-4(%m%)%=%-19(%3l,%02c%03V%)
+
+execute pathogen#infect()
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+
+let g:syntastic_always_populate_loc_list=1
+let g:syntastic_auto_loc_list=1
+let g:syntastic_check_on_open=0
+let g:syntastic_check_on_wq=0
+let g:syntastic_javascript_checkers=[]
+if filereadable('.jshintrc')
+  call add(g:syntastic_javascript_checkers, 'jshint')
+end
+if filereadable('.eslintrc')
+  call add(g:syntastic_javascript_checkers, 'eslint')
+end
+let g:syntastic_aggregate_errors=1
+let g:syntastic_enable_signs=0
