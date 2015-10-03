@@ -28,8 +28,8 @@ set ruler
 set backspace=indent,eol,start
 set undofile
 set undodir=~/.vim/undodir
-set directory=~/.vim/backup
-set backupdir=~/.vim/backup
+set backupdir=~/.vim/backup,/tmp
+set directory=~/.vim/backup,/tmp
 
 " highlighting
 nnoremap <cr> :nohl<cr><cr> 
