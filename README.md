@@ -1,22 +1,35 @@
-dotfiles
-========
+# dotfiles
 
-vim
----
+## vim
 
 Add this to `~/.vimrc`
 
-    set runtimepath^=$HOME/dotfiles.git/vim
-    runtime vimrc
+```bash
+set runtimepath^=$HOME/dotfiles.git/vim
+runtime vimrc
+```
 
-shell
------
+### command-t
+
+Command-T needs to be compiled
+
+```bash
+cd vim/bundle/command-t/ruby/command-t
+make clean
+ruby extconf.rb
+make
+```
+
+## shell
 
 Add this to `~/.zshrc`
 
-    source $HOME/dotfiles.git/shell/zshrc
+```bash
+source $HOME/dotfiles.git/shell/zshrc
+```
 
-oh-my-ssh
----
+## oh-my-ssh
 
-    curl -L http://install.ohmyz.sh | sh
+```bash
+curl -L http://install.ohmyz.sh | sh
+```
