@@ -23,8 +23,17 @@ function my_git_prompt_status () {
   fi
 }
 
+function jobs_prompt () {
+  num_jobs=$(jobs | wc -l | awk '{ print $1 }')
+  if [ $num_jobs != "0" ]; then
+    echo " §"
+  fi
+}
+
 PROMPT='%{$fg[green]%}%m%{$reset_color%}:\
 %{$fg[magenta]%}%c%{$reset_color%}\
-$(git_prompt_short_sha)$(git_prompt_info)$(my_git_prompt_status) \
-%(?.%{$fg[green]%}.%{$fg[red]%})%(!.#.»)%{$reset_color%} '
+$(git_prompt_short_sha)$(git_prompt_info)$(my_git_prompt_status)\
+%{$fg[magenta]%}$(jobs_prompt)%{$reset_color%}\
+ %(?.%{$fg[green]%}.%{$fg[red]%})%(!.#.»)%{$reset_color%} '
+
 PROMPT2='%{$fg[red]%}> %{$reset_color%}'
