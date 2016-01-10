@@ -4,8 +4,6 @@ ZSH_THEME="bryankendall"
 DISABLE_UPDATE_PROMPT=true
 MYVIMRC=$HOME/dotfiles.git/vim/vimrc
 
-export HOMEBREW_GITHUB_API_TOKEN=21addb35423b1ddbc1f5f649dc54d886eb63aca8
-
 if [ -e '/usr/local/bin/virtualenvwrapper.sh' ]
 then
   export WORKON_HOME=$HOME/.virtualenvs
