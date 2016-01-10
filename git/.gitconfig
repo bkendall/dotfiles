@@ -1,0 +1,32 @@
+[user]
+	email = bryan@runnable.com
+	name = Bryan Kendall
+[core]
+	excludesfile = /Users/bkendall/.gitignore
+[diff]
+	tool = vimdiff
+[difftool]
+	prompt = false
+[merge]
+	tool = diffconflicts
+[mergetool]
+	prompt = false
+[mergetool "diffconflicts"]
+	cmd = diffconflicts vim $BASE $LOCAL $REMOTE $MERGED
+	trustExitCode = true
+	keepBackup = false
+[filter "media"]
+	clean = git-media-clean %f
+	smudge = git-media-smudge %f
+[alias]
+  l = "!. ~/.githelpers && pretty_git_log"
+  la = !git l --all
+  r = !GIT_NO_PAGER=1 git l -30
+  ra = !git r --all
+  head = !git r -1
+  h = !git head
+  hp = "!. ~/.githelpers && show_git_head"
+[filter "lfs"]
+	clean = git lfs clean %f
+	smudge = git lfs smudge %f
+	required = true

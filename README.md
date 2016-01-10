@@ -33,3 +33,13 @@ source $HOME/dotfiles.git/shell/zshrc
 ```bash
 curl -L http://install.ohmyz.sh | sh
 ```
+
+## git
+
+Copy the contents of `./git` to `$HOME`
+
+```bash
+cp ./git/.git* $HOME
+```
+
+Need to replace some of the configuration values in `$HOME/.gitconfig`
