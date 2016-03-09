@@ -31,7 +31,15 @@ source $HOME/dotfiles.git/shell/zshrc
 ## oh-my-ssh
 
 ```bash
+apt-get install zsh
+# chsh -s /bin/zsh [username]
 curl -L http://install.ohmyz.sh | sh
+```
+
+## zsh theme
+
+```bash
+cp ./shell/zsh/themes/bryankendall.zsh-theme .oh-my-zsh/themes/
 ```
 
 ## git
