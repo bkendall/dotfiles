@@ -5,7 +5,7 @@
 Add this to `~/.vimrc`
 
 ```bash
-set runtimepath^=$HOME/dotfiles.git/vim
+set runtimepath^=$HOME/dotfiles/vim
 runtime vimrc
 ```
 
@@ -25,7 +25,7 @@ make
 Add this to `~/.zshrc`
 
 ```bash
-source $HOME/dotfiles.git/shell/zshrc
+source $HOME/dotfiles/shell/zshrc
 ```
 
 ## oh-my-ssh
@@ -39,7 +39,7 @@ curl -L http://install.ohmyz.sh | sh
 ## zsh theme
 
 ```bash
-cp ./shell/zsh/themes/bryankendall.zsh-theme .oh-my-zsh/themes/
+cp ./shell/zsh/themes/bryankendall.zsh-theme ~/.oh-my-zsh/themes/
 ```
 
 ## git
