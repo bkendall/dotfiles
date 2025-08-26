@@ -2,7 +2,7 @@ ZSH=$HOME/.oh-my-zsh
 ZSH_THEME="bryankendall"
 
 DISABLE_UPDATE_PROMPT=true
-MYVIMRC=$HOME/dotfiles.git/vim/vimrc
+MYVIMRC=$HOME/dotfiles/vim/vimrc
 
 if [ -e '/usr/local/bin/virtualenvwrapper.sh' ]
 then
@@ -20,8 +20,9 @@ if [ -d "$HOME/.ssh/config.d" ]; then
   cat $HOME/.ssh/config.d/*.config >> $HOME/.ssh/config
 fi
 
-plugins=(git brew docker npm redis-cli)
+NVM_LAZY_LOAD=true
+
+plugins=(git npm zsh-nvm)
 
 export EDITOR='vim'
 
-source $ZSH/oh-my-zsh.sh

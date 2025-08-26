@@ -87,8 +87,3 @@ if filereadable('./node_modules/standard/package.json')
 end
 let g:syntastic_aggregate_errors=1
 let g:syntastic_enable_signs=0
-
-" command-t
-call pathogen#helptags()
-let g:CommandTFileScanner='ruby'
-let g:CommandTWildIgnore=&wildignore . ",**/node_modules/*"
