@@ -1,6 +1,12 @@
 [user]
-	email = bryan@runnable.com
+	email = bryan@bryankendall.com
 	name = Bryan Kendall
+[init]
+	defaultBranch = main
+[pull]
+	rebase = true
+[branch]
+	sort = -committerdate
 [core]
 	excludesfile = ~/.gitignore
 [diff]
