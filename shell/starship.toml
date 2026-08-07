@@ -1,7 +1,9 @@
 # Starship configuration matching the classic bryankendall Zsh prompt
 add_newline = false
 
+# Explicit format: hostname:directory|(git_branch git_status) jobs character
 format = "$hostname:$directory$git_branch$git_status$jobs$character"
+right_format = ""
 
 [hostname]
 ssh_only = false
@@ -40,3 +42,32 @@ format = ' [$symbol]($style)'
 [character]
 success_symbol = "[»](bold green) "
 error_symbol = "[»](bold red) "
+
+# Disable unnecessary language and cloud environment modules
+[package]
+disabled = true
+
+[python]
+disabled = true
+
+[gcloud]
+disabled = true
+
+[aws]
+disabled = true
+
+[docker_context]
+disabled = true
+
+[nodejs]
+disabled = true
+
+[ruby]
+disabled = true
+
+[golang]
+disabled = true
+
+[cmd_duration]
+disabled = true
+
