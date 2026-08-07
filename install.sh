@@ -113,6 +113,9 @@ do_install() {
     ok "Starship prompt is already installed ($(command -v starship))"
   fi
 
+  mkdir -p "$HOME/.config"
+  symlink_file "$DOTFILES_DIR/shell/starship.toml" "$HOME/.config/starship.toml"
+
   local zshrc_line="source \"$DOTFILES_DIR/shell/zshrc\""
   ensure_line_in_file "$zshrc_line" "$HOME/.zshrc"
 

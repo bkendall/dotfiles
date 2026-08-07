@@ -9,6 +9,7 @@ DISABLE_UPDATE_PROMPT=true
 # Prompt Configuration (Starship with Zsh vcs_info fallback)
 # ============================================================================
 if command -v starship >/dev/null 2>&1; then
+  export STARSHIP_CONFIG="${DOTFILES:-$HOME/dotfiles}/shell/starship.toml"
   eval "$(starship init zsh)"
 else
   autoload -Uz vcs_info

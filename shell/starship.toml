@@ -1,0 +1,42 @@
+# Starship configuration matching the classic bryankendall Zsh prompt
+add_newline = false
+
+format = "$hostname:$directory$git_branch$git_status$jobs$character"
+
+[hostname]
+ssh_only = false
+style = "bold green"
+format = '[$hostname]($style)'
+
+[directory]
+style = "bold magenta"
+truncation_length = 1
+format = '[$path]($style)'
+
+[git_branch]
+symbol = "|"
+style = "bold cyan"
+format = '[$symbol\($branch]($style)'
+
+[git_status]
+style = "bold cyan"
+format = '[$all_status$ahead_behind]($style)\)'
+conflicted = "═"
+ahead = "!"
+behind = "⇡"
+diverged = "⇕"
+untracked = "✭"
+stashed = ""
+modified = "?"
+staged = "+"
+renamed = "➜"
+deleted = "✖"
+
+[jobs]
+symbol = "§"
+style = "bold magenta"
+format = ' [$symbol]($style)'
+
+[character]
+success_symbol = "[»](bold green) "
+error_symbol = "[»](bold red) "
