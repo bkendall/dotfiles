@@ -7,6 +7,14 @@ set -e
 
 DOTFILES_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
+# Ensure Homebrew paths are in PATH for non-interactive installer sessions
+if [ -d "/opt/homebrew/bin" ] && [[ ":$PATH:" != *":/opt/homebrew/bin:"* ]]; then
+  export PATH="/opt/homebrew/bin:$PATH"
+fi
+if [ -d "/usr/local/bin" ] && [[ ":$PATH:" != *":/usr/local/bin:"* ]]; then
+  export PATH="/usr/local/bin:$PATH"
+fi
+
 # ANSI Color Codes
 GREEN='\033[0;32m'
 RED='\033[0;31m'
@@ -92,8 +100,19 @@ do_install() {
   local vimrc_line="set runtimepath^=$DOTFILES_DIR/vim | runtime vimrc"
   ensure_line_in_file "$vimrc_line" "$HOME/.vimrc"
 
-  # 3. Zsh & Oh My Zsh Setup
+  # 3. Zsh & Prompt Setup
   print_header "3. Zsh Configuration"
+  if ! command -v starship >/dev/null 2>&1; then
+    if command -v brew >/dev/null 2>&1; then
+      ok "Installing Starship prompt via Homebrew..."
+      brew install starship || warn "Could not install Starship automatically via Homebrew."
+    else
+      warn "Starship prompt is not installed. Native Zsh vcs_info prompt fallback will be used."
+    fi
+  else
+    ok "Starship prompt is already installed ($(command -v starship))"
+  fi
+
   local zshrc_line="source \"$DOTFILES_DIR/shell/zshrc\""
   ensure_line_in_file "$zshrc_line" "$HOME/.zshrc"
 
@@ -147,7 +166,8 @@ do_doctor() {
   if command -v starship >/dev/null 2>&1; then
     ok "Starship prompt is installed ($(command -v starship))"
   else
-    ok "Using native Zsh vcs_info prompt fallback"
+    warn "Starship prompt is not installed. Using native Zsh vcs_info fallback prompt. (Install via: brew install starship)"
+    warnings=$((warnings + 1))
   fi
 
   if [ -f "$HOME/.zshrc" ]; then
