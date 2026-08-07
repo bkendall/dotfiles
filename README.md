@@ -22,18 +22,18 @@ Personal dotfiles for standardizing shell (Zsh + Oh My Zsh), Git, and Vim enviro
 
 ---
 
-## What `install.sh` Configures
+## Features & Configuration
 
-- **Git Submodules**: Initializes and updates submodules (e.g. `syntastic`).
-- **Vim**: Configures `~/.vimrc` to source `dotfiles/vim` and creates `~/.vim/undodir` and `~/.vim/backup`.
-- **Zsh**: Configures `~/.zshrc` to source `dotfiles/shell/zshrc` and links `bryankendall.zsh-theme` to `~/.oh-my-zsh/custom/themes/`.
-- **Git**: Symlinks `.gitconfig`, `.githelpers`, `.gitignore`, and `.gitk` into `$HOME/`.
+- **`install.sh`**: One-command installer that symlinks configs into `$HOME` and provides a `--doctor` mode to diagnose issues.
+- **Zsh**: Preserves a 50k line deduplicated history (`SHARE_HISTORY`), sets up Oh My Zsh plugins, and installs the custom prompt theme (`bryankendall.zsh-theme`).
+- **Vim**: Configured with `vim-plug` and `vim-lsp` / `vim-lsp-settings` for zero-config Language Server Protocol (auto-format on save, diagnostics, definition lookup) and Solarized dark theme.
+- **Git**: Configured with Gary Bernhardt's `pretty_git_log` tree helper, modern defaults (`init.defaultBranch = main`, `pull.rebase = true`, `branch.sort = -committerdate`), and custom diff tools.
 
 ---
 
 ## Manual Setup Reference
 
-If you prefer to set up manually without `install.sh`:
+If you prefer manual setup over `./install.sh`:
 
 ### Vim
 Add to `~/.vimrc`:
