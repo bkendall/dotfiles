@@ -2,7 +2,7 @@
 add_newline = false
 
 # Format layout: hostname:directory(git_commit|git_branch git_status) jobs character
-format = "$hostname:$directory$git_commit$git_branch$git_status$jobs$character"
+format = "$hostname:$directory$git_commit$git_branch$git_status$jobs $character"
 right_format = ""
 
 [hostname]
@@ -47,9 +47,9 @@ style = "bold magenta"
 format = ' [$symbol]($style)'
 
 [character]
-success_symbol = "[»](bold green) "
-error_symbol = "[»](bold red) "
-vimcmd_symbol = "[»](bold green) "
+success_symbol = "[»](bold green)"
+error_symbol = "[»](bold red)"
+vimcmd_symbol = "[»](bold green)"
 
 # Disable unnecessary language and cloud environment modules
 [package]
