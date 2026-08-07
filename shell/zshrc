@@ -1,4 +1,12 @@
 # ============================================================================
+# Environment Variables & Repository Paths
+# ============================================================================
+export DOTFILES="${DOTFILES:-${0:A:h:h}}"
+export EDITOR='vim'
+export MYVIMRC="$DOTFILES/vim/vimrc"
+export NVM_LAZY_LOAD=true
+
+# ============================================================================
 # Oh My Zsh Configuration
 # ============================================================================
 ZSH=$HOME/.oh-my-zsh
@@ -9,7 +17,7 @@ DISABLE_UPDATE_PROMPT=true
 # Prompt Configuration (Starship with Zsh vcs_info fallback)
 # ============================================================================
 if command -v starship >/dev/null 2>&1; then
-  export STARSHIP_CONFIG="${DOTFILES:-$HOME/dotfiles}/shell/starship.toml"
+  export STARSHIP_CONFIG="$DOTFILES/shell/starship.toml"
   eval "$(starship init zsh)"
 else
   autoload -Uz vcs_info
@@ -33,13 +41,6 @@ else
   PROMPT='%F{green}%m%f:%F{magenta}%c%f${vcs_info_msg_0_}$(_jobs_prompt) %(?.%F{green}.%F{red})»%f '
   PROMPT2='%F{red}> %f'
 fi
-
-# ============================================================================
-# Environment Variables
-# ============================================================================
-export EDITOR='vim'
-export MYVIMRC=${DOTFILES:-$HOME/dotfiles}/vim/vimrc
-export NVM_LAZY_LOAD=true
 
 # ============================================================================
 # Persistent Zsh History
