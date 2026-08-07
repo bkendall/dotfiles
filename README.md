@@ -9,17 +9,6 @@ set runtimepath^=$HOME/dotfiles/vim
 runtime vimrc
 ```
 
-### command-t
-
-Command-T needs to be compiled
-
-```bash
-cd vim/bundle/command-t/ruby/command-t
-make clean
-ruby extconf.rb
-make
-```
-
 ## shell
 
 Add this to `~/.zshrc`
