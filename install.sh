@@ -7,13 +7,8 @@ set -e
 
 DOTFILES_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
-# Ensure Homebrew paths are in PATH for non-interactive installer sessions
-if [ -d "/opt/homebrew/bin" ] && [[ ":$PATH:" != *":/opt/homebrew/bin:"* ]]; then
-  export PATH="/opt/homebrew/bin:$PATH"
-fi
-if [ -d "/usr/local/bin" ] && [[ ":$PATH:" != *":/usr/local/bin:"* ]]; then
-  export PATH="/usr/local/bin:$PATH"
-fi
+# Ensure Homebrew paths are in PATH for installer & doctor
+export PATH="/opt/homebrew/bin:/usr/local/bin:$PATH"
 
 # ANSI Color Codes
 GREEN='\033[0;32m'
@@ -81,6 +76,23 @@ ensure_line_in_file() {
 do_install() {
   print_header "Installing Dotfiles"
   echo "Dotfiles directory: $DOTFILES_DIR"
+
+  # 0. Check Required System Commands
+  print_header "0. System Requirements Check"
+  local missing_count=0
+  for cmd in zsh git vim curl; do
+    if command -v "$cmd" >/dev/null 2>&1; then
+      ok "Found required command '$cmd': $(command -v "$cmd")"
+    else
+      fail "Required command '$cmd' is missing from PATH!"
+      missing_count=$((missing_count + 1))
+    fi
+  done
+
+  if [ $missing_count -gt 0 ]; then
+    printf "%bError: $missing_count required command(s) missing. Please install missing tools and re-run ./install.sh%b\n\n" "${RED}${BOLD}" "${NC}"
+    exit 1
+  fi
 
   # 1. Directory & Environment Setup
   print_header "1. Environment Setup"
