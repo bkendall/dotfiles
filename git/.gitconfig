@@ -2,7 +2,7 @@
 	email = bryan@runnable.com
 	name = Bryan Kendall
 [core]
-	excludesfile = /Users/bkendall/.gitignore
+	excludesfile = ~/.gitignore
 [diff]
 	tool = vimdiff
 [difftool]

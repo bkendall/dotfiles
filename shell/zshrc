@@ -2,17 +2,29 @@ ZSH=$HOME/.oh-my-zsh
 ZSH_THEME="bryankendall"
 
 DISABLE_UPDATE_PROMPT=true
-MYVIMRC=$HOME/dotfiles.git/vim/vimrc
+MYVIMRC=${DOTFILES:-$HOME/dotfiles}/vim/vimrc
 
-if [ -e '/usr/local/bin/virtualenvwrapper.sh' ]
-then
-  export WORKON_HOME=$HOME/.virtualenvs
-  source /usr/local/bin/virtualenvwrapper.sh
-fi
+for venv_script in \
+  "$HOME/.local/bin/virtualenvwrapper.sh" \
+  "/opt/homebrew/bin/virtualenvwrapper.sh" \
+  "/usr/local/bin/virtualenvwrapper.sh" \
+  "/usr/bin/virtualenvwrapper.sh"
+do
+  if [ -e "$venv_script" ]; then
+    export WORKON_HOME=$HOME/.virtualenvs
+    source "$venv_script"
+    break
+  fi
+done
 
-if [ -e '/usr/local/go' ]
-then
+if [ -d '/usr/local/go/bin' ]; then
   export PATH=$PATH:/usr/local/go/bin
+fi
+if [ -d '/opt/homebrew/opt/go/libexec/bin' ]; then
+  export PATH=$PATH:/opt/homebrew/opt/go/libexec/bin
+fi
+if [ -d "$HOME/go/bin" ]; then
+  export PATH=$PATH:$HOME/go/bin
 fi
 
 if [ -d "$HOME/.ssh/config.d" ]; then

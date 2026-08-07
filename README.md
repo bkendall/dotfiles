@@ -17,12 +17,12 @@ Add this to `~/.zshrc`
 source $HOME/dotfiles/shell/zshrc
 ```
 
-## oh-my-ssh
+## oh-my-zsh
 
 ```bash
 apt-get install zsh
 # chsh -s /bin/zsh [username]
-curl -L http://install.ohmyz.sh | sh
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 ```
 
 ## zsh theme
