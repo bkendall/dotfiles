@@ -1,0 +1,43 @@
+name: CI
+
+on:
+  push:
+    branches: [ master, main ]
+  pull_request:
+    branches: [ master, main ]
+
+jobs:
+  test-dotfiles:
+    name: Test Dotfiles (${{ matrix.os }})
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, macos-latest]
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Install dependencies (Ubuntu)
+        if: runner.os == 'Linux'
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y zsh curl vim git
+
+      - name: Install Oh My Zsh (Non-interactive)
+        run: |
+          RUNZSH=no CHSH=no sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+
+      - name: Run Dotfiles Installer
+        run: |
+          ./install.sh --install
+
+      - name: Run Dotfiles Doctor
+        run: |
+          ./install.sh --doctor
+
+      - name: Verify Vim Configuration
+        run: |
+          vim --version
+          vim -e -s -u "$HOME/.vimrc" -c "qall!"
