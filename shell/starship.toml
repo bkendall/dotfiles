@@ -1,8 +1,8 @@
 # Starship configuration matching the classic bryankendall Zsh prompt
 add_newline = false
 
-# Explicit format: hostname:directory|(git_branch git_status) jobs character
-format = "$hostname:$directory$git_branch$git_status$jobs$character"
+# Format layout: hostname:directory(git_commit|git_branch git_status) jobs character
+format = "$hostname:$directory$git_commit$git_branch$git_status$jobs$character"
 right_format = ""
 
 [hostname]
@@ -15,10 +15,17 @@ style = "bold magenta"
 truncation_length = 1
 format = '[$path]($style)'
 
+[git_commit]
+commit_hash_length = 7
+only_detached = false
+tag_disabled = true
+style = "bold cyan"
+format = '[\($hash]($style)'
+
 [git_branch]
 symbol = "|"
 style = "bold cyan"
-format = '[$symbol\($branch]($style)'
+format = '[$symbol$branch]($style)'
 
 [git_status]
 style = "bold cyan"
@@ -71,4 +78,3 @@ disabled = true
 
 [cmd_duration]
 disabled = true
-

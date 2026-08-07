@@ -19,8 +19,8 @@ else
   zstyle ':vcs_info:git:*' check-for-changes true
   zstyle ':vcs_info:git:*' stagedstr '%F{green}+%f'
   zstyle ':vcs_info:git:*' unstagedstr '%F{red}?%f'
-  zstyle ':vcs_info:git:*' formats '%F{cyan}|(%b%u%c)%f'
-  zstyle ':vcs_info:git:*' actionformats '%F{cyan}|(%b|%a%u%c)%f'
+  zstyle ':vcs_info:git:*' formats '%F{cyan}(%7.7i|%b%u%c)%f'
+  zstyle ':vcs_info:git:*' actionformats '%F{cyan}(%7.7i|%b|%a%u%c)%f'
 
   function _jobs_prompt() {
     local njobs
