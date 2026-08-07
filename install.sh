@@ -94,14 +94,6 @@ do_install() {
 
   # 3. Zsh & Oh My Zsh Setup
   print_header "3. Zsh Configuration"
-  local omz_custom_themes="$HOME/.oh-my-zsh/custom/themes"
-  if [ -d "$HOME/.oh-my-zsh" ]; then
-    mkdir -p "$omz_custom_themes"
-    symlink_file "$DOTFILES_DIR/shell/zsh/themes/bryankendall.zsh-theme" "$omz_custom_themes/bryankendall.zsh-theme"
-  else
-    warn "Oh My Zsh not found at ~/.oh-my-zsh. Install Oh My Zsh to use the custom theme."
-  fi
-
   local zshrc_line="source \"$DOTFILES_DIR/shell/zshrc\""
   ensure_line_in_file "$zshrc_line" "$HOME/.zshrc"
 
@@ -152,11 +144,10 @@ do_doctor() {
     errors=$((errors + 1))
   fi
 
-  if [ -f "$HOME/.oh-my-zsh/custom/themes/bryankendall.zsh-theme" ] || [ -f "$HOME/.oh-my-zsh/themes/bryankendall.zsh-theme" ]; then
-    ok "Custom theme 'bryankendall.zsh-theme' is installed"
+  if command -v starship >/dev/null 2>&1; then
+    ok "Starship prompt is installed ($(command -v starship))"
   else
-    fail "Custom theme 'bryankendall.zsh-theme' missing from ~/.oh-my-zsh"
-    errors=$((errors + 1))
+    ok "Using native Zsh vcs_info prompt fallback"
   fi
 
   if [ -f "$HOME/.zshrc" ]; then

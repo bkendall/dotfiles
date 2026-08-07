@@ -11,8 +11,7 @@ This document provides context, architectural design details, and guidelines for
   - Supports `--install` (or default) for symlinking configurations and `--doctor` (or `-d`) for running health checks.
   - Written in portable Bash using `printf` formatting. Must remain non-interactive and scriptable for CI environments.
 - **`shell/`**:
-  - `shell/zshrc`: Main Zsh configuration file (sourced from `~/.zshrc`). Sets up Oh My Zsh plugins, persistent 50k history (`SHARE_HISTORY`), Go/tooling PATHs, and dynamic `~/.ssh/config.d/*.config` stitching.
-  - `shell/zsh/themes/bryankendall.zsh-theme`: Minimalist custom prompt displaying background jobs (`§`), Git status/SHA, working directory, host, and return code arrow (`»`).
+  - `shell/zshrc`: Main Zsh configuration file (sourced from `~/.zshrc`). Sets up Oh My Zsh plugins, Starship prompt with native Zsh `vcs_info` fallback, persistent 50k history (`SHARE_HISTORY`), Go/tooling PATHs, and dynamic `~/.ssh/config.d/*.config` stitching.
 - **`vim/`**:
   - `vim/vimrc`: Main Vim configuration file (sourced from `~/.vimrc`). Auto-bootstraps `vim-plug` if missing, configures `vim-lsp` + `vim-lsp-settings` for async LSP support, auto-format on save, and sets up Solarized dark theme.
   - `vim/colors/`, `vim/ftdetect/`, `vim/ftplugin/`, `vim/syntax/`: Syntax and color support files.

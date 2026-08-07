@@ -1,9 +1,37 @@
 # ============================================================================
-# Oh My Zsh & Theme Configuration
+# Oh My Zsh Configuration
 # ============================================================================
 ZSH=$HOME/.oh-my-zsh
-ZSH_THEME="bryankendall"
+ZSH_THEME="" # Disabled to allow Starship / native Zsh vcs_info prompt
 DISABLE_UPDATE_PROMPT=true
+
+# ============================================================================
+# Prompt Configuration (Starship with Zsh vcs_info fallback)
+# ============================================================================
+if command -v starship >/dev/null 2>&1; then
+  eval "$(starship init zsh)"
+else
+  autoload -Uz vcs_info
+  precmd() { vcs_info }
+
+  zstyle ':vcs_info:*' enable git
+  zstyle ':vcs_info:git:*' check-for-changes true
+  zstyle ':vcs_info:git:*' stagedstr '%F{green}+%f'
+  zstyle ':vcs_info:git:*' unstagedstr '%F{red}?%f'
+  zstyle ':vcs_info:git:*' formats '%F{cyan}|(%b%u%c)%f'
+  zstyle ':vcs_info:git:*' actionformats '%F{cyan}|(%b|%a%u%c)%f'
+
+  function _jobs_prompt() {
+    local njobs
+    njobs=$(jobs | wc -l | awk '{print $1}')
+    if [ "$njobs" -ne 0 ]; then
+      echo " %F{magenta}§%f"
+    fi
+  }
+
+  PROMPT='%F{green}%m%f:%F{magenta}%c%f${vcs_info_msg_0_}$(_jobs_prompt) %(?.%F{green}.%F{red})%(!.#.»)%f '
+  PROMPT2='%F{red}> %f'
+fi
 
 # ============================================================================
 # Environment Variables
@@ -52,3 +80,4 @@ fi
 # Oh My Zsh Plugins
 # ============================================================================
 plugins=(git brew docker zsh-nvm npm)
+

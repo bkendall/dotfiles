@@ -25,7 +25,7 @@ Personal dotfiles for standardizing shell (Zsh + Oh My Zsh), Git, and Vim enviro
 ## Features & Configuration
 
 - **`install.sh`**: One-command installer that symlinks configs into `$HOME` and provides a `--doctor` mode to diagnose issues.
-- **Zsh**: Preserves a 50k line deduplicated history (`SHARE_HISTORY`), sets up Oh My Zsh plugins, and installs the custom prompt theme (`bryankendall.zsh-theme`).
+- **Zsh & Prompt**: Automatically uses [Starship](https://starship.rs/) if installed, or falls back to native Zsh `vcs_info` for fast, zero-dependency Git status indicators and job counters. Includes 50k deduplicated persistent history (`SHARE_HISTORY`).
 - **Vim**: Configured with `vim-plug` and `vim-lsp` / `vim-lsp-settings` for zero-config Language Server Protocol (auto-format on save, diagnostics, definition lookup) and Solarized dark theme.
 - **Git**: Configured with Gary Bernhardt's `pretty_git_log` tree helper, modern defaults (`init.defaultBranch = main`, `pull.rebase = true`, `branch.sort = -committerdate`), and custom diff tools.
 
@@ -45,12 +45,6 @@ set runtimepath^=$HOME/dotfiles/vim | runtime vimrc
 Add to `~/.zshrc`:
 ```zsh
 source "$HOME/dotfiles/shell/zshrc"
-```
-
-### Oh My Zsh Theme
-```bash
-mkdir -p ~/.oh-my-zsh/custom/themes
-ln -s ~/dotfiles/shell/zsh/themes/bryankendall.zsh-theme ~/.oh-my-zsh/custom/themes/
 ```
 
 ### Git
