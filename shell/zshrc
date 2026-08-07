@@ -30,7 +30,7 @@ else
     fi
   }
 
-  PROMPT='%F{green}%m%f:%F{magenta}%c%f${vcs_info_msg_0_}$(_jobs_prompt) %(?.%F{green}.%F{red})%(!.#.»)%f '
+  PROMPT='%F{green}%m%f:%F{magenta}%c%f${vcs_info_msg_0_}$(_jobs_prompt) %(?.%F{green}.%F{red})»%f '
   PROMPT2='%F{red}> %f'
 fi
 
