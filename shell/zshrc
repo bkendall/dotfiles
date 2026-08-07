@@ -4,19 +4,6 @@ ZSH_THEME="bryankendall"
 DISABLE_UPDATE_PROMPT=true
 MYVIMRC=${DOTFILES:-$HOME/dotfiles}/vim/vimrc
 
-for venv_script in \
-  "$HOME/.local/bin/virtualenvwrapper.sh" \
-  "/opt/homebrew/bin/virtualenvwrapper.sh" \
-  "/usr/local/bin/virtualenvwrapper.sh" \
-  "/usr/bin/virtualenvwrapper.sh"
-do
-  if [ -e "$venv_script" ]; then
-    export WORKON_HOME=$HOME/.virtualenvs
-    source "$venv_script"
-    break
-  fi
-done
-
 if [ -d '/usr/local/go/bin' ]; then
   export PATH=$PATH:/usr/local/go/bin
 fi
