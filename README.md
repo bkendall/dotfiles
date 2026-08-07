@@ -1,42 +1,61 @@
 # dotfiles
 
-## vim
+Personal dotfiles for standardizing shell (Zsh + Oh My Zsh), Git, and Vim environments across macOS and Linux.
 
-Add this to `~/.vimrc`
+## Quick Start
 
-```bash
-set runtimepath^=$HOME/dotfiles/vim
-runtime vimrc
+1. **Clone the repository**:
+   ```bash
+   git clone https://github.com/bkendall/dotfiles.git ~/dotfiles
+   cd ~/dotfiles
+   ```
+
+2. **Run the installer**:
+   ```bash
+   ./install.sh
+   ```
+
+3. **Verify configuration with Doctor mode**:
+   ```bash
+   ./install.sh --doctor
+   ```
+
+---
+
+## What `install.sh` Configures
+
+- **Git Submodules**: Initializes and updates submodules (e.g. `syntastic`).
+- **Vim**: Configures `~/.vimrc` to source `dotfiles/vim` and creates `~/.vim/undodir` and `~/.vim/backup`.
+- **Zsh**: Configures `~/.zshrc` to source `dotfiles/shell/zshrc` and links `bryankendall.zsh-theme` to `~/.oh-my-zsh/custom/themes/`.
+- **Git**: Symlinks `.gitconfig`, `.githelpers`, `.gitignore`, and `.gitk` into `$HOME/`.
+
+---
+
+## Manual Setup Reference
+
+If you prefer to set up manually without `install.sh`:
+
+### Vim
+Add to `~/.vimrc`:
+```vim
+set runtimepath^=$HOME/dotfiles/vim | runtime vimrc
 ```
 
-## shell
-
-Add this to `~/.zshrc`
-
-```bash
-source $HOME/dotfiles/shell/zshrc
+### Zsh
+Add to `~/.zshrc`:
+```zsh
+source "$HOME/dotfiles/shell/zshrc"
 ```
 
-## oh-my-zsh
-
+### Oh My Zsh Theme
 ```bash
-apt-get install zsh
-# chsh -s /bin/zsh [username]
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+mkdir -p ~/.oh-my-zsh/custom/themes
+ln -s ~/dotfiles/shell/zsh/themes/bryankendall.zsh-theme ~/.oh-my-zsh/custom/themes/
 ```
 
-## zsh theme
-
+### Git
 ```bash
-cp ./shell/zsh/themes/bryankendall.zsh-theme ~/.oh-my-zsh/themes/
+ln -s ~/dotfiles/git/.gitconfig ~/.gitconfig
+ln -s ~/dotfiles/git/.githelpers ~/.githelpers
+ln -s ~/dotfiles/git/.gitignore ~/.gitignore
 ```
-
-## git
-
-Copy the contents of `./git` to `$HOME`
-
-```bash
-cp ./git/.git* $HOME
-```
-
-Need to replace some of the configuration values in `$HOME/.gitconfig`
