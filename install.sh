@@ -74,13 +74,14 @@ do_install() {
   print_header "Installing Dotfiles"
   echo "Dotfiles directory: $DOTFILES_DIR"
 
-  # 1. Git Submodules
-  print_header "1. Git Submodules"
-  if [ -d "$DOTFILES_DIR/.git" ]; then
-    git -C "$DOTFILES_DIR" submodule update --init --recursive
-    ok "Git submodules updated."
-  else
-    warn "Not a git repo or .git directory missing; skipping submodule update."
+  # 1. Directory & Environment Setup
+  print_header "1. Environment Setup"
+  mkdir -p "$HOME/.vim/undodir" "$HOME/.vim/backup" "$HOME/.vim/autoload"
+  ok "Ensured ~/.vim/undodir, ~/.vim/backup, and ~/.vim/autoload exist."
+
+  if [ ! -f "$HOME/.vim/autoload/plug.vim" ]; then
+    curl -fLo "$HOME/.vim/autoload/plug.vim" --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+    ok "Downloaded vim-plug to ~/.vim/autoload/plug.vim"
   fi
 
   # 2. Vim Setup
@@ -221,12 +222,13 @@ do_doctor() {
     warnings=$((warnings + 1))
   fi
 
-  # 5. Submodules
-  print_header "Git Submodules"
-  if [ -d "$DOTFILES_DIR/vim/bundle/syntastic/plugin" ]; then
-    ok "Submodule 'syntastic' is populated"
+  # 5. Vim Plugins & LSP
+  print_header "Vim Plugins & LSP"
+  local plug_file="$HOME/.vim/autoload/plug.vim"
+  if [ -f "$plug_file" ] || [ -f "$HOME/.local/share/nvim/site/autoload/plug.vim" ]; then
+    ok "vim-plug plugin manager is installed"
   else
-    warn "Submodule 'syntastic' appears unpopulated. Run 'git submodule update --init --recursive'"
+    warn "vim-plug is not installed yet. Launching Vim will auto-download it."
     warnings=$((warnings + 1))
   fi
 
