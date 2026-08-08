@@ -7,11 +7,11 @@ right_format = ""
 
 [hostname]
 ssh_only = false
-style = "bold green"
-format = '[$hostname]($style)'
+style = "green"
+format = '\[s\][$hostname]($style)'
 
 [directory]
-style = "bold magenta"
+style = "purple"
 truncation_length = 1
 format = '[$path]($style)'
 
@@ -19,16 +19,16 @@ format = '[$path]($style)'
 commit_hash_length = 7
 only_detached = false
 tag_disabled = true
-style = "bold cyan"
-format = '[\($hash]($style)'
+style = "red"
+format = '\([$hash]($style)'
 
 [git_branch]
 symbol = "|"
-style = "bold cyan"
-format = '[$symbol$branch]($style)'
+style = "cyan"
+format = '$symbol[$branch]($style)'
 
 [git_status]
-style = "bold cyan"
+style = "bold red"
 format = '[$all_status$ahead_behind]($style)\)'
 conflicted = "═"
 ahead = "!"
