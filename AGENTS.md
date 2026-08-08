@@ -12,6 +12,7 @@ This document provides context, architectural design details, and guidelines for
   - Written in portable Bash using `printf` formatting. Must remain non-interactive and scriptable for CI environments.
 - **`shell/`**:
   - `shell/zshrc`: Main Zsh configuration file (sourced from `~/.zshrc`). Sets up Oh My Zsh plugins, Starship prompt with native Zsh `vcs_info` fallback, persistent 50k history (`SHARE_HISTORY`), Go/tooling PATHs, and dynamic `~/.ssh/config.d/*.config` stitching.
+  - `shell/starship.toml`: Custom Starship prompt configuration recreating the classic prompt layout (`host:dir(SHA|branch?!)»`) while disabling noisy language/cloud modules.
 - **`vim/`**:
   - `vim/vimrc`: Main Vim configuration file (sourced from `~/.vimrc`). Auto-bootstraps `vim-plug` if missing, configures `vim-lsp` + `vim-lsp-settings` for async LSP support, auto-format on save, and sets up Solarized dark theme.
   - `vim/colors/`, `vim/ftdetect/`, `vim/ftplugin/`, `vim/syntax/`: Syntax and color support files.
@@ -55,5 +56,5 @@ The following tasks are pre-planned ideas for future development:
     - **`eza`** / **`bat`**: Modern `ls` / `cat` with syntax highlighting and icons.
 - [ ] **Modular Shell Config**:
   - Refactor `shell/zshrc` into sub-files if complexity grows (e.g. `shell/env.zsh`, `shell/aliases.zsh`, `shell/history.zsh`).
-- [ ] **Starship Prompt Alternative**:
-  - Provide an optional toggle or check for `starship` prompt while preserving the fallback custom `bryankendall.zsh-theme`.
+- [x] **Starship Prompt Integration**:
+  - Implemented Starship prompt (`shell/starship.toml`) with native Zsh `vcs_info` fallback.
