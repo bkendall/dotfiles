@@ -43,7 +43,7 @@ deleted = "✖"
 
 [jobs]
 symbol = "§"
-style = "bold magenta"
+style = "bold purple"
 format = ' [$symbol]($style)'
 
 [character]
