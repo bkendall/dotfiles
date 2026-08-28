@@ -13,9 +13,37 @@ ZSH=$HOME/.oh-my-zsh
 ZSH_THEME="" # Disabled to allow Starship / native Zsh vcs_info prompt
 DISABLE_UPDATE_PROMPT=true
 
+# Oh My Zsh Plugins (declared before loading oh-my-zsh)
+plugins=(git brew docker nvm npm)
+
+if [ -f "$ZSH/oh-my-zsh.sh" ]; then
+  source "$ZSH/oh-my-zsh.sh"
+fi
+
+# ============================================================================
+# Keybindings & History Search
+# ============================================================================
+# Ensure Emacs keybindings (default in interactive shells, overridden when EDITOR=vim)
+bindkey -e
+
+# Interactive history incremental search (Ctrl+R / Ctrl+S)
+bindkey '^R' history-incremental-pattern-search-backward
+bindkey '^S' history-incremental-pattern-search-forward
+
+# Prefix history search using Up/Down arrow keys
+autoload -Uz up-line-or-beginning-search down-line-or-beginning-search
+zle -N up-line-or-beginning-search
+zle -N down-line-or-beginning-search
+bindkey '^[[A' up-line-or-beginning-search
+bindkey '^[OA' up-line-or-beginning-search
+bindkey '^[[B' down-line-or-beginning-search
+bindkey '^[OB' down-line-or-beginning-search
+
 # ============================================================================
 # Prompt Configuration (Starship with Zsh vcs_info fallback)
 # ============================================================================
+setopt PROMPT_SUBST
+
 if command -v starship >/dev/null 2>&1; then
   export STARSHIP_CONFIG="$DOTFILES/shell/starship.toml"
   eval "$(starship init zsh)"
@@ -24,21 +52,14 @@ else
   precmd() { vcs_info }
 
   zstyle ':vcs_info:*' enable git
+  zstyle ':vcs_info:git:*' get-revision true
   zstyle ':vcs_info:git:*' check-for-changes true
   zstyle ':vcs_info:git:*' stagedstr '%F{green}+%f'
   zstyle ':vcs_info:git:*' unstagedstr '%F{red}?%f'
   zstyle ':vcs_info:git:*' formats '%F{cyan}(%7.7i|%b%u%c)%f'
   zstyle ':vcs_info:git:*' actionformats '%F{cyan}(%7.7i|%b|%a%u%c)%f'
 
-  function _jobs_prompt() {
-    local njobs
-    njobs=$(jobs | wc -l | awk '{print $1}')
-    if [ "$njobs" -ne 0 ]; then
-      echo " %F{magenta}§%f"
-    fi
-  }
-
-  PROMPT='%F{green}%m%f:%F{magenta}%c%f${vcs_info_msg_0_}$(_jobs_prompt) %(?.%F{green}.%F{red})»%f '
+  PROMPT='%F{green}%m%f:%F{magenta}%c%f${vcs_info_msg_0_}%(1j. %F{magenta}§%f.) %(?.%F{green}.%F{red})»%f '
   PROMPT2='%F{red}> %f'
 fi
 
@@ -77,9 +98,4 @@ if [ -d "$HOME/.ssh/config.d" ]; then
   rm -f "$HOME/.ssh/config"
   cat "$HOME/.ssh/config.d"/*.config >> "$HOME/.ssh/config" 2>/dev/null || true
 fi
-
-# ============================================================================
-# Oh My Zsh Plugins
-# ============================================================================
-plugins=(git brew docker zsh-nvm npm)
 
