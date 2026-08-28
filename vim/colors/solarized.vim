@@ -6,6 +6,9 @@
 " Created:  In the middle of the night
 " Modified: 2011 May 05
 "
+let s:keepcpo = &cpo
+set cpo&vim
+
 " Usage "{{{
 "
 " ---------------------------------------------------------------------
@@ -1115,3 +1118,6 @@ autocmd ColorScheme * if g:colors_name != "solarized" | silent! aunmenu Solarize
 "
 " vim:foldmethod=marker:foldlevel=0
 "}}}
+
+let &cpo = s:keepcpo
+unlet s:keepcpo
