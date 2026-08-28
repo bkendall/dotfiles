@@ -45,11 +45,40 @@ bindkey '^[OB' down-line-or-beginning-search
 setopt PROMPT_SUBST
 
 if command -v starship >/dev/null 2>&1; then
+  _starship_citc_precmd() {
+    case "$PWD" in
+      /google/src/cloud/*/*)
+        local rest="${PWD#/google/src/cloud/*/}"
+        export CITC_WORKSPACE="${rest%%/*}"
+        export STARSHIP_CONFIG="$DOTFILES/shell/starship_citc.toml"
+        ;;
+      *)
+        unset CITC_WORKSPACE
+        export STARSHIP_CONFIG="$DOTFILES/shell/starship.toml"
+        ;;
+    esac
+  }
+  autoload -Uz add-zsh-hook
+  add-zsh-hook precmd _starship_citc_precmd
   export STARSHIP_CONFIG="$DOTFILES/shell/starship.toml"
   eval "$(starship init zsh)"
 else
   autoload -Uz vcs_info
-  precmd() { vcs_info }
+  _citc_workspace() {
+    case "$PWD" in
+      /google/src/cloud/*/*)
+        local rest="${PWD#/google/src/cloud/*/}"
+        citc_info="%F{cyan}(${rest%%/*})%f"
+        ;;
+      *)
+        citc_info=""
+        ;;
+    esac
+  }
+  precmd() {
+    vcs_info
+    _citc_workspace
+  }
 
   zstyle ':vcs_info:*' enable git
   zstyle ':vcs_info:git:*' get-revision true
@@ -59,7 +88,7 @@ else
   zstyle ':vcs_info:git:*' formats '%F{cyan}(%7.7i|%b%u%c)%f'
   zstyle ':vcs_info:git:*' actionformats '%F{cyan}(%7.7i|%b|%a%u%c)%f'
 
-  PROMPT='%F{green}%m%f:%F{magenta}%c%f${vcs_info_msg_0_}%(1j. %F{magenta}§%f.) %(?.%F{green}.%F{red})»%f '
+  PROMPT='%F{green}%m%f:%F{magenta}%c%f${vcs_info_msg_0_}${citc_info}%(1j. %F{magenta}§%f.) %(?.%F{green}.%F{red})»%f '
   PROMPT2='%F{red}> %f'
 fi
 

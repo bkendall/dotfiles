@@ -1,8 +1,8 @@
-# Starship configuration matching the classic bryankendall Zsh prompt
+# Starship configuration for Citc workspaces (disables git scanning over FUSE)
 add_newline = false
 
-# Format layout: hostname:directory(git_commit|git_branch git_status) jobs character
-format = "$hostname:$directory$git_commit$git_branch$git_status$jobs $character"
+# Format layout: hostname:directory(citc_workspace) jobs character
+format = "$hostname:$directory${env_var.CITC_WORKSPACE}$jobs $character"
 right_format = ""
 
 [hostname]
@@ -16,31 +16,10 @@ truncation_length = 1
 truncate_to_repo = false
 format = '[$path]($style)'
 
-[git_commit]
-commit_hash_length = 7
-only_detached = false
-tag_disabled = true
-style = "red"
-format = '\([$hash]($style)'
-
-[git_branch]
-symbol = "|"
+[env_var.CITC_WORKSPACE]
+variable = "CITC_WORKSPACE"
 style = "cyan"
-format = '$symbol[$branch]($style)'
-
-[git_status]
-style = "bold red"
-format = '[$all_status$ahead_behind]($style)\)'
-conflicted = "═"
-ahead = "!"
-behind = "⇡"
-diverged = "⇕"
-untracked = "✭"
-stashed = ""
-modified = "?"
-staged = "+"
-renamed = "➜"
-deleted = "✖"
+format = '\([$env_value]($style)\)'
 
 [jobs]
 symbol = "§"
@@ -51,6 +30,22 @@ format = ' [$symbol]($style)'
 success_symbol = "[»](bold green)"
 error_symbol = "[»](bold red)"
 vimcmd_symbol = "[»](bold green)"
+
+# Disable git modules to prevent slow network FUSE stat calls in Citc
+[git_branch]
+disabled = true
+
+[git_commit]
+disabled = true
+
+[git_status]
+disabled = true
+
+[git_state]
+disabled = true
+
+[git_metrics]
+disabled = true
 
 # Disable unnecessary language and cloud environment modules
 [package]

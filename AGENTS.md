@@ -11,8 +11,8 @@ This document provides context, architectural design details, and guidelines for
   - Supports `--install` (or default) for symlinking configurations and `--doctor` (or `-d`) for running health checks.
   - Written in portable Bash using `printf` formatting. Must remain non-interactive and scriptable for CI environments.
 - **`shell/`**:
-  - `shell/zshrc`: Main Zsh configuration file (sourced from `~/.zshrc`). Sets up Oh My Zsh plugins, Starship prompt with native Zsh `vcs_info` fallback, persistent 50k history (`SHARE_HISTORY`), Go/tooling PATHs, and dynamic `~/.ssh/config.d/*.config` stitching.
-  - `shell/starship.toml`: Custom Starship prompt configuration recreating the classic prompt layout (`host:dir(SHA|branch?!)»`) while disabling noisy language/cloud modules.
+  - `shell/zshrc`: Main Zsh configuration file (sourced from `~/.zshrc`). Sets up Oh My Zsh plugins, Starship prompt with native Zsh `vcs_info` & CITC client fallback, persistent 50k history (`SHARE_HISTORY`), Go/tooling PATHs, and dynamic `~/.ssh/config.d/*.config` stitching.
+  - `shell/starship.toml`: Custom Starship prompt configuration recreating the classic prompt layout (`host:dir(SHA|branch?!)»` or `host:dir(citc_workspace)»`) while disabling noisy language/cloud modules.
 - **`vim/`**:
   - `vim/vimrc`: Main Vim configuration file (sourced from `~/.vimrc`). Auto-bootstraps `vim-plug` if missing, configures `vim-lsp` + `vim-lsp-settings` for async LSP support, auto-format on save, and sets up Solarized dark theme.
   - `vim/colors/`, `vim/ftdetect/`, `vim/ftplugin/`, `vim/syntax/`: Syntax and color support files.
@@ -57,4 +57,4 @@ The following tasks are pre-planned ideas for future development:
 - [ ] **Modular Shell Config**:
   - Refactor `shell/zshrc` into sub-files if complexity grows (e.g. `shell/env.zsh`, `shell/aliases.zsh`, `shell/history.zsh`).
 - [x] **Starship Prompt Integration**:
-  - Implemented Starship prompt (`shell/starship.toml`) with native Zsh `vcs_info` fallback.
+  - Implemented Starship prompt (`shell/starship.toml`) with Git & Citc client detection and native Zsh `vcs_info` fallback.

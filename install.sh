@@ -127,6 +127,7 @@ do_install() {
 
   mkdir -p "$HOME/.config"
   symlink_file "$DOTFILES_DIR/shell/starship.toml" "$HOME/.config/starship.toml"
+  symlink_file "$DOTFILES_DIR/shell/starship_citc.toml" "$HOME/.config/starship_citc.toml"
 
   local zshrc_line="source \"$DOTFILES_DIR/shell/zshrc\""
   ensure_line_in_file "$zshrc_line" "$HOME/.zshrc"
