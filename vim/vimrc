@@ -37,6 +37,11 @@ set directory=~/.vim/backup,/tmp
 " highlighting
 nnoremap <cr> :nohl<cr><cr> 
 
+" Optimize syntax engine performance for complex files (e.g. Astro)
+set redrawtime=10000          " Increase timeout limit for syntax highlighting to 10 seconds
+set re=0                      " Let Vim dynamically select the best regex engine (0=auto)
+autocmd FileType astro syntax sync minlines=100 " Avoid syncing from start to speed up multi-language parsing
+
 " searching/moving
 set ignorecase
 set smartcase
